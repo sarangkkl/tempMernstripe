@@ -1,0 +1,19 @@
+.main__sidebar_div{
+  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+  height: 100vh;
+}
+.nav__links{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  
+  
+}
+.nav_link{
+  padding: 5px 30px;
+  border: 1px solid rgb(244, 239, 239);
+  i{
+    color: rgb(160, 144, 144);
+  }
+  
+}
