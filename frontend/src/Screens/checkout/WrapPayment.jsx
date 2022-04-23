@@ -7,25 +7,45 @@ import  Payment  from './Payment'
 
 const WrapPayment = () => {
     const [stripeApiKey, setStripeApiKey] = useState("");
+    const [clientSecret, setClientSecret] = useState("");
+
+    const paymentData = {
+      amount: Math.round(1000.* 100),
+    };
+
+    async function getClientSecret(){
+      const config = {
+        headers:{
+          "Content-type":"application/json",
+        }
+      }
+      const {data} = await axios.post(
+        "/api/v1/payment/process",
+        paymentData,
+        config
+      )
+      const client_secret = data.client_secret;
+      setClientSecret(client_secret)
+    }
 
     async function getStripeApiKey() {
         const { data } = await axios.get("/api/v1/stripeapikey");
-    
         setStripeApiKey(data.stripeApiKey);
       }
       useEffect(() => {
         getStripeApiKey();
+        getClientSecret();
       }, [])
 
       const options = {
     // passing the client secret obtained from the server
-    clientSecret: '{{CLIENT_SECRET}}',
+    clientSecret: clientSecret,
   };
-      
+      console.log("The client serceret is ",clientSecret)
   return (
       <>
       {/* <Payment/> */}
-        <Elements stripe={loadStripe("pk_test_51K3v68SHnIwKHjK6Dc2nuXO54sHGX7DcMGPhAxVDIqMbphBki3zgVGBRKTwjTEgRlOYNmtkOdHSFld9o5j7RFQTF00cNYHkecS")}
+        <Elements stripe={loadStripe(stripeApiKey)}
         options={options}
         >
             <Payment/>
