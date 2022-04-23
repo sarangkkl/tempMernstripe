@@ -16,11 +16,18 @@ const WrapPayment = () => {
       useEffect(() => {
         getStripeApiKey();
       }, [])
+
+      const options = {
+    // passing the client secret obtained from the server
+    clientSecret: '{{CLIENT_SECRET}}',
+  };
       
   return (
       <>
       {/* <Payment/> */}
-        <Elements stripe={loadStripe(stripeApiKey)}>
+        <Elements stripe={loadStripe("pk_test_51K3v68SHnIwKHjK6Dc2nuXO54sHGX7DcMGPhAxVDIqMbphBki3zgVGBRKTwjTEgRlOYNmtkOdHSFld9o5j7RFQTF00cNYHkecS")}
+        options={options}
+        >
             <Payment/>
         </Elements>
       

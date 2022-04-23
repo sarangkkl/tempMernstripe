@@ -1,9 +1,10 @@
 import React from "react";
+// import "./main"
 import { useNavigate } from "react-router-dom";
-// import {PaymentElement} from '@stripe/react-stripe-js';
+import {PaymentElement} from '@stripe/react-stripe-js';
 import { useSelector } from "react-redux";
 import { createOrder, clearErrors } from "../../action/orderAction";
-import { ElementsConsumer, PaymentElement } from "@stripe/react-stripe-js";
+// import { ElementsConsumer, PaymentElement } from "@stripe/react-stripe-js";
 
 import { Elements } from "@stripe/react-stripe-js";
 
@@ -50,18 +51,10 @@ const Payment = () => {
     <>
       <h1>This is payment</h1>
 
-      <form action="">
-        <CardNumberElement/>
-        <button
-          type="button"
-          disabled={!stripe || !elements}
-          onClick={(e) => {
-            handleSubmit(e);
-          }}
-        >
-          Pay
-        </button>
-      </form>
+      <form>
+      <PaymentElement />
+      <button>Submit</button>
+    </form>
     </>
   );
 };
